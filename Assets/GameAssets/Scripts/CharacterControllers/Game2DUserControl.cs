@@ -7,6 +7,7 @@ public class Game2DUserControl : MonoBehaviour
 {
     private GameCharacter2D m_Character;
     private bool m_Jump;
+	private bool m_Attack1;
 
 
     private void Awake()
@@ -22,6 +23,12 @@ public class Game2DUserControl : MonoBehaviour
             // Read the jump input in Update so button presses aren't missed.
             m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
         }
+
+		if (!m_Attack1)
+		{
+			// Read the jump input in Update so button presses aren't missed.
+			m_Attack1 = CrossPlatformInputManager.GetButtonDown("Attack");
+		}
     }
 
 
@@ -31,8 +38,9 @@ public class Game2DUserControl : MonoBehaviour
         bool crouch = Input.GetKey(KeyCode.LeftControl);
         float h = CrossPlatformInputManager.GetAxis("Horizontal");
         // Pass all parameters to the character control script.
-        m_Character.Move(h, crouch, m_Jump);
+		m_Character.Move(h, crouch, m_Jump, m_Attack1);
         m_Jump = false;
+		m_Attack1 = false;
     }
 }
 

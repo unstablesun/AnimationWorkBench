@@ -50,7 +50,7 @@ public class GameCharacter2D : MonoBehaviour
     }
 
 
-    public void Move(float move, bool crouch, bool jump)
+	public void Move(float move, bool crouch, bool jump, bool attack)
     {
         // If crouching, check to see if the character can stand up
         if (!crouch && m_Anim.GetBool("Crouch"))
@@ -90,6 +90,12 @@ public class GameCharacter2D : MonoBehaviour
                 Flip();
             }
         }
+
+		if(attack)
+		{
+			m_Anim.SetBool("Attack", true);
+
+		}
         // If the player should jump...
         if (m_Grounded && jump && m_Anim.GetBool("Ground"))
         {
